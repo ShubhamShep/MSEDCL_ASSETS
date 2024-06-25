@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import psycopg2
 import plotly.express as px
+import os
 
 # Set page config (this must be the first Streamlit command)
 st.set_page_config(
@@ -41,11 +42,11 @@ st.markdown(
 # Database connection
 def get_db_connection():
     conn = psycopg2.connect(
-        host="localhost",
-        database="Asset_data_mh",
-        user="postgres",
-        password="Shep1234",
-        port="5432"
+        host=os.getenv("DB_HOST"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        port=os.getenv("DB_PORT")
     )
     return conn
 
